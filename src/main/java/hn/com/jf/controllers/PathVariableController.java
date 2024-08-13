@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hn.com.jf.models.User;
+import hn.com.jf.models.dto.ParamDTO;
 
 @RequestMapping("/api/var")
 public class PathVariableController {
@@ -39,25 +40,34 @@ public class PathVariableController {
 	@Value("#{${config.valuesMap}}")
 	private Map<String, Object> valuesMap;
 
+	@GetMapping("/baz/{message}")
+	public ParamDTO baz(@PathVariable String message) {
+		ParamDTO param = new ParamDTO();
+
+		param.setMessage(message);
+
+		return param;
+	}
+
 	@GetMapping("/mix/{product}/{id}")
 	public Map<String, Object> mix(@PathVariable String product, @PathVariable Long id) {
 		Map<String, Object> json = new HashMap<>();
-		
+
 		json.put("product", product);
 		json.put("id", id);
 
 		return json;
 	}
-	
+
 	@PostMapping("/create")
 	public User create(@RequestBody User user) {
 		return user;
 	}
-	
+
 	@GetMapping("/values")
-	public Map<String, Object> values(){
+	public Map<String, Object> values() {
 		Map<String, Object> json = new HashMap<>();
-		
+
 		json.put("username", username);
 		json.put("message", message);
 		json.put("code", code);
@@ -66,9 +76,8 @@ public class PathVariableController {
 		json.put("stringValues", stringValues);
 		json.put("listOfValuesManual", listOfValuesManual);
 		json.put("valuesMap", valuesMap);
-		
+
 		return json;
 	}
-	
 
 }
