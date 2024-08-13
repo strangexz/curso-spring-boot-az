@@ -8,8 +8,8 @@ public class HomeController {
 
 	@GetMapping({ "", "/", "/home" })
 	public String home() {
-		return "redirect/list";
-//		return "forward/list";
+		return "redirect:/list";
+//		return "forward:/list";
 	}
 
 }
